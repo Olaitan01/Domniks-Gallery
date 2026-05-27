@@ -5,8 +5,8 @@ import { usePageTransition } from "../context/TransitionContext";
 const navItems = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
-  { label: "Work", to: "/work" },
   { label: "Contact", to: "/contact" },
+   { label: "Work", to: "/work" },
 ];
 
 export default function Header() {
@@ -19,7 +19,7 @@ export default function Header() {
         <img
           src={logo}
           alt="Domnik's Gallery Logo"
-          className="w-18 h-18 object-cover rounded-full"
+          className="w-30 h-25 object-cover rounded-full"
         />
       </div>
 

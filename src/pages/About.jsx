@@ -1,24 +1,68 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import Domnik from "../assets/domnik.png";
+import { usePageTransition } from "../context/TransitionContext";
 
 export default function About() {
   const titleRef = useRef(null);
+  const imageRef = useRef(null);
+  const { registerExit, captureSharedImage, peekSharedImage, clearSharedImage } =
+    usePageTransition();
+
+  // Apply FLIP offset before first paint so there's no visible flash
+  useLayoutEffect(() => {
+    const data = peekSharedImage();
+    if (data && imageRef.current) {
+      const dest = imageRef.current.getBoundingClientRect();
+      gsap.set(imageRef.current, {
+        x: data.rect.left - dest.left,
+        // y: data.rect.top - dest.top,
+        scaleX: data.rect.width / dest.width,
+        scaleY: data.rect.height / dest.height,
+        transformOrigin: "top left",
+      });
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    // Reveal text upward from below — mirrors Home h1 pattern
-    gsap.fromTo(
-      titleRef.current,
-      { yPercent: 0, opacity: 0 },
-      {
-        yPercent: 10,
-        opacity: 1,
-        duration: 1.1,
-        ease: "power3.out",
-        delay: 0.5,
-      },
+    registerExit(
+      (targetPath) =>
+        new Promise((resolve) => {
+          if (targetPath === "/contact") {
+            captureSharedImage(imageRef.current);
+          } else {
+            clearSharedImage();
+          }
+          const tl = gsap.timeline({ onComplete: resolve });
+          tl.to(imageRef.current, { opacity: 0, duration: 0.30, ease: "power2.in" }, 0).to(
+            titleRef.current,
+            { y: -20, opacity: 0, duration: 0.45, ease: "power2.in" },
+            0,
+          );
+        }),
     );
-  }, []);
+
+    const data = peekSharedImage();
+    if (data && imageRef.current) {
+      clearSharedImage();
+      gsap.to(imageRef.current, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 0.85, ease: "expo.out" });
+      gsap.fromTo(
+        titleRef.current,
+        { yPercent: 0, opacity: 0 },
+        { yPercent: 10, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.2 },
+      );
+    } else {
+      gsap.fromTo(
+        titleRef.current,
+        { yPercent: 0, opacity: 0 },
+        { yPercent: 10, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.5 },
+      );
+    }
+
+    const title = titleRef.current;
+    const image = imageRef.current;
+    return () => gsap.killTweensOf([title, image]);
+  }, [registerExit, captureSharedImage, peekSharedImage, clearSharedImage]);
 
   return (
     <main className="flex flex-col min-h-screen px-6 relative overflow-y-hidden ">
@@ -36,16 +80,16 @@ export default function About() {
         </h1>
       </div>
       <div className="mt-20  text-gray-700 text-lg leading-relaxed absolute bottom-15 right-0">
-        <img src={Domnik} alt="Domnik" className="max-w-fit w-3xs " />
+        <img ref={imageRef} src={Domnik} alt="Domnik" className="max-w-fit w-3xs " />
       </div>
       <div className="w-full flex justify-end">
-        <div className="flex flex-row gap-5 max-w-4xl  pt-10  mr-8">
+        <div className="flex flex-row gap-5 max-w-4xl  pt-10  mr-0">
           <div>
             <h2
               className=""
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "clamp(28px, 4vw, 24px)",
+                fontSize: "32px",
               }}
             >
               From The Archivist
@@ -74,7 +118,7 @@ export default function About() {
               className=""
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "clamp(28px, 4vw, 24px)",
+                fontSize: "32px",
               }}
             >
               The Arthive — Documentation Process
@@ -125,7 +169,7 @@ export default function About() {
                   <li>Routines,</li>
                   <li>Objects once considered ordinary</li>
                 </ul>
-                <p className="mt-2 text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-2xs text-justify">
+                <p className="mt-2 text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-3xs text-justify">
                   From this conversation a visual archive is constructed
                 </p>
               </div>

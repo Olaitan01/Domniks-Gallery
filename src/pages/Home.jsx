@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { usePageTransition } from "../context/TransitionContext";
 import img1 from "../assets/IMG_4266.JPEG";
 import img2 from "../assets/IMG_4313.JPEG";
 import img3 from "../assets/IMG_4272.JPG.jpeg";
@@ -15,8 +16,18 @@ export default function Home() {
   const subtitleRef = useRef(null);
   const imgRefs = useRef([]);
   const quoteRef = useRef(null);
+  const { registerExit } = usePageTransition();
 
   useEffect(() => {
+    registerExit(
+      () =>
+        new Promise((resolve) => {
+          const tl = gsap.timeline({ onComplete: resolve });
+          tl.to(titleRef.current, { y: 50, opacity: 0, duration: 0.6, ease: "power2.in" })
+            .to(subtitleRef.current, { y: 25, opacity: 0, duration: 0.4, ease: "power2.in" }, "-=0.35");
+        })
+    );
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
@@ -26,24 +37,42 @@ export default function Home() {
         .fromTo(
           imgRefs.current[0],
           { y: 50, opacity: 0, rotation: heroImg[0].rotation + 12 },
-          { y: 0, opacity: 1, rotation: heroImg[0].rotation, duration: 2, ease: "expo.out" },
+          {
+            y: 0,
+            opacity: 1,
+            rotation: heroImg[0].rotation,
+            duration: 1,
+            ease: "expo.out",
+          },
         )
         .fromTo(
           imgRefs.current[1],
           { y: 50, opacity: 0, rotation: heroImg[1].rotation + 12 },
-          { y: 0, opacity: 1, rotation: heroImg[1].rotation, duration: 2, ease: "expo.out" },
+          {
+            y: 0,
+            opacity: 1,
+            rotation: heroImg[1].rotation,
+            duration: 1,
+            ease: "expo.out",
+          },
           "-=0.25",
         )
         .fromTo(
           imgRefs.current[2],
           { y: 50, opacity: 0, rotation: heroImg[2].rotation + 12 },
-          { y: 0, opacity: 1, rotation: heroImg[2].rotation, duration: 2, ease: "expo.out" },
+          {
+            y: 0,
+            opacity: 1,
+            rotation: heroImg[2].rotation,
+            duration: 1,
+            ease: "expo.out",
+          },
           "-=0.25",
         );
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [registerExit]);
 
   return (
     <main className="relative flex flex-col items-start justify-start min-h-screen px-6  pt-12">

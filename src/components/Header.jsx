@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { usePageTransition } from "../context/TransitionContext";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -9,6 +10,8 @@ const navItems = [
 ];
 
 export default function Header() {
+  const { navigateTo } = usePageTransition();
+
   return (
     <header className="flex items-center sticky top-0 z-50 bg-inherit border-b border-[#000000] px-8 h-16">
       {/* Box 1 — Logo */}
@@ -35,6 +38,10 @@ export default function Header() {
               <NavLink
                 to={to}
                 end
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo(to);
+                }}
                 className={({ isActive }) =>
                   isActive
                     ? "text-sm font-semibold text-gray-900 underline underline-offset-4 decoration-[#C9996B]"

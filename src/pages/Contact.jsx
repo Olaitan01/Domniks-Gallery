@@ -18,7 +18,7 @@ export default function Contact() {
     if (data && imageRef.current) {
       const dest = imageRef.current.getBoundingClientRect();
       gsap.set(imageRef.current, {
-        x: data.rect.left - dest.left,
+        // x: data.rect.left - dest.left,
         // y: data.rect.top - dest.top,
         scaleX: data.rect.width / dest.width,
         scaleY: data.rect.height / dest.height,
@@ -104,7 +104,7 @@ export default function Contact() {
           Contact.
         </h1>
       </div>
-      <div className="absolute top-10 right-10">
+      <div className="absolute top-10 right-8">
         <img
           ref={imageRef}
           src={contactImg}

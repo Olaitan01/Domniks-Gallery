@@ -15,7 +15,7 @@ export default function About() {
     if (data && imageRef.current) {
       const dest = imageRef.current.getBoundingClientRect();
       gsap.set(imageRef.current, {
-        x: data.rect.left - dest.left,
+        // x: data.rect.left - dest.left,
         // y: data.rect.top - dest.top,
         scaleX: data.rect.width / dest.width,
         scaleY: data.rect.height / dest.height,

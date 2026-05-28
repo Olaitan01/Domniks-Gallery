@@ -1,5 +1,8 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 // optimized domnik assets
 import domnik_400_webp from "../assets/optimized/domnik-400.webp";
 import domnik_800_webp from "../assets/optimized/domnik-800.webp";
@@ -10,6 +13,10 @@ import { usePageTransition } from "../context/TransitionContext";
 export default function About() {
   const titleRef = useRef(null);
   const imageRef = useRef(null);
+  const imageWrapRef = useRef(null);
+  const archivistRef = useRef(null);
+  const processCol1Ref = useRef(null);
+  const processCol2Ref = useRef(null);
   const {
     registerExit,
     captureSharedImage,
@@ -95,6 +102,40 @@ export default function About() {
     return () => gsap.killTweensOf([title, image]);
   }, [registerExit, captureSharedImage, peekSharedImage, clearSharedImage]);
 
+  // Mobile-only scroll animations
+  useEffect(() => {
+    if (window.innerWidth >= 768) return;
+
+    const targets = [
+      imageWrapRef.current,
+      archivistRef.current,
+      processCol1Ref.current,
+      processCol2Ref.current,
+    ].filter(Boolean);
+
+    const ctx = gsap.context(() => {
+      targets.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 32, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.75,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <main className="flex flex-col min-h-screen px-4 md:px-6 relative overflow-x-hidden md:overflow-y-hidden">
       {/* Title: flows on mobile at top, absolute on desktop at bottom-left */}
@@ -112,7 +153,10 @@ export default function About() {
       </div>
 
       {/* Image: flows on mobile, absolute on desktop */}
-      <div className="flex justify-center md:block mt-4 md:mt-0 md:absolute md:bottom-15 md:right-0">
+      <div
+        ref={imageWrapRef}
+        className="flex justify-center md:block mt-4 md:mt-0 md:absolute md:bottom-15 md:right-0"
+      >
         <picture>
           <source
             type="image/webp"
@@ -135,7 +179,7 @@ export default function About() {
 
       <div className="w-full flex justify-start md:justify-end mt-4 md:mt-0">
         <div className="flex flex-col md:flex-row gap-8 md:gap-5 w-full max-w-4xl pt-4 md:pt-10">
-          <div>
+          <div ref={archivistRef}>
             <h2
               style={{
                 fontFamily: "'Playfair Display', serif",
@@ -173,7 +217,7 @@ export default function About() {
               The Arthive — Documentation Process
             </h2>
             <div className="flex flex-col sm:flex-row gap-0 md:gap-15 items-start md:items-baseline">
-              <div>
+              <div ref={processCol1Ref}>
                 <p className="mt-4 text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-2xs text-justify">
                   <span>The Arthive begins with memory.</span>{" "}
                   <span>
@@ -206,11 +250,11 @@ export default function About() {
                     <li>the texture of a street,</li>
                     <li>the sound of evening radios,</li>
                     <li>the sound of footsteps,</li>
-                    <li>clothing</li>
+                    <li>clothing,</li>
                   </ul>
                 </div>
               </div>
-              <div>
+              <div ref={processCol2Ref}>
                 <ul className="list-disc list-inside text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-2xs">
                   <li>Silence,</li>
                   <li>Gestures,</li>
@@ -218,7 +262,7 @@ export default function About() {
                   <li>Routines,</li>
                   <li>Objects once considered ordinary</li>
                 </ul>
-                <p className="mt-2 text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-3xs text-justify">
+                <p className="mt-2 pb-14 md:pb-0 text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-3xs text-justify">
                   From this conversation a visual archive is constructed
                 </p>
               </div>

@@ -1,5 +1,8 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 // import contactImg from "../assets/IMG_4272.JPG.jpeg";
 import contact_400_webp from "../assets/optimized/IMG_4272.JPG-400.webp";
 import contact_800_webp from "../assets/optimized/IMG_4272.JPG-800.webp";
@@ -12,6 +15,7 @@ import { usePageTransition } from "../context/TransitionContext";
 export default function Contact() {
   const titleRef = useRef(null);
   const imageRef = useRef(null);
+  const contactInfoRef = useRef(null);
   const {
     registerExit,
     captureSharedImage,
@@ -96,6 +100,47 @@ export default function Contact() {
     return () => gsap.killTweensOf([title, image]);
   }, [registerExit, captureSharedImage, peekSharedImage, clearSharedImage]);
 
+  // Mobile-only scroll animations
+  useEffect(() => {
+    if (window.innerWidth >= 768) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        imageRef.current,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.75,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: imageRef.current,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        },
+      );
+
+      gsap.fromTo(
+        contactInfoRef.current,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.75,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: contactInfoRef.current,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        },
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <main className="flex flex-col min-h-screen  px-4 md:px-6 relative overflow-x-hidden md:overflow-y-hidden">
       {/* Title: flows on mobile, absolute on desktop */}
@@ -130,7 +175,7 @@ export default function Contact() {
         </picture>
       </div>
 
-      <div className=" md:mt-10 gap-0 text-gray-700 text-lg leading-relaxed flex flex-col md:flex-row  md:gap-14 max-w-4xl">
+      <div ref={contactInfoRef} className=" md:mt-10 gap-0 text-gray-700 text-lg leading-relaxed flex flex-col md:flex-row  md:gap-14 max-w-4xl">
         <div className="flex flex-col gap-2 ">
           <div className="flex flex-col gap-1">
             <span

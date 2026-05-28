@@ -131,22 +131,24 @@ export default function Header() {
       <header className="flex items-center sticky top-0 z-1002 bg-inherit border-b border-[#000000] px-4 md:px-8 h-14 md:h-16">
         {/* Logo */}
         <div className="flex flex-1 items-center justify-start">
-          <picture>
-            <source
-              type="image/webp"
-              srcSet={`${logo_400_webp} 400w, ${logo_800_webp} 800w`}
-              sizes="80px"
-            />
-            <img
-              src={logo_400_jpg}
-              srcSet={`${logo_400_jpg} 400w, ${logo_800_jpg} 800w`}
-              sizes="80px"
-              alt="Domnik's Gallery Logo"
-              loading="lazy"
-              decoding="async"
-              className="w-20 h-16 md:w-30 md:h-25 object-cover rounded-full"
-            />
-          </picture>
+          <NavLink to="/">
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={`${logo_400_webp} 400w, ${logo_800_webp} 800w`}
+                sizes="80px"
+              />
+              <img
+                src={logo_400_jpg}
+                srcSet={`${logo_400_jpg} 400w, ${logo_800_jpg} 800w`}
+                sizes="80px"
+                alt="Domnik's Gallery Logo"
+                loading="lazy"
+                decoding="async"
+                className="w-20 h-16 md:w-30 md:h-25 object-cover rounded-full"
+              />
+            </picture>
+          </NavLink>
         </div>
 
         {/* Location — desktop only */}

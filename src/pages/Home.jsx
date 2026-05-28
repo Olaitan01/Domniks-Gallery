@@ -123,7 +123,7 @@ export default function Home() {
         <div
           className="relative w-77.25 h-51 -top-2.5 left-8 md:absolute md:left-51.25 md:top-81.5"
         >
-          {heroImg.map(({ src }, index) => {
+          {heroImg.map((item, index) => {
             // choose the optimized imports based on index
             const webp400 = index === 0 ? img1_400_webp : index === 1 ? img2_400_webp : img3_400_webp
             const webp800 = index === 0 ? img1_800_webp : index === 1 ? img2_800_webp : img3_800_webp

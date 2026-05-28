@@ -97,10 +97,11 @@ export default function Work() {
 
     const obs = Observer.create({
       target: galleryRef.current,
-      type: "wheel,touch,pointer",
+      type: "wheel,touch",
       onDown: () => goTo(curIdx.current + 1, 1),
       onUp: () => goTo(curIdx.current - 1, -1),
       tolerance: 10,
+      lockAxis: true,
       preventDefault: true,
     });
 
@@ -125,6 +126,7 @@ export default function Work() {
       <section
         ref={galleryRef}
         className="relative h-screen overflow-hidden bg-[#EDE9E6]"
+        style={{ touchAction: "none" }}
       >
         {arts.length === 0 && (
           <div className="absolute inset-0 flex items-center justify-center">

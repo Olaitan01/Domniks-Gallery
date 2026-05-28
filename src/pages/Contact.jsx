@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import contactImg from "../assets/IMG_4272.JPG.jpeg";
+// import contactImg from "../assets/IMG_4272.JPG.jpeg";
 import contact_400_webp from "../assets/optimized/IMG_4272.JPG-400.webp";
 import contact_800_webp from "../assets/optimized/IMG_4272.JPG-800.webp";
 import contact_1200_webp from "../assets/optimized/IMG_4272.JPG-1200.webp";

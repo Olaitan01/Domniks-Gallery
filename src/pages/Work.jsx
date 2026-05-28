@@ -97,10 +97,17 @@ export default function Work() {
 
     const obs = Observer.create({
       target: galleryRef.current,
-      type: "wheel,touch",
+      type: "wheel,touch,pointer",
+
+      onLeft: () => goTo(curIdx.current + 1, 1),
+
+      onRight: () => goTo(curIdx.current - 1, -1),
+
+      // Optional desktop wheel fallback
       onDown: () => goTo(curIdx.current + 1, 1),
       onUp: () => goTo(curIdx.current - 1, -1),
-      tolerance: 10,
+
+      tolerance: 12,
       lockAxis: true,
       preventDefault: true,
     });
@@ -285,32 +292,44 @@ export default function Work() {
                       </h2>
 
                       <div className="w-8 h-px bg-black" />
-
-                      {art.description && (
-                        <p
-                          className="text-[0.7rem] text-gray-600 leading-relaxed text-justify max-w-xs"
-                          style={{
-                            fontFamily: "’Roboto Mono’, monospace",
-                          }}
-                        >
-                          {art.description}
-                        </p>
-                      )}
+                      <div>
+                        {art.dimensions && (
+                          <i
+                            className="text-[0.7rem]  text-gray-600 leading-relaxed text-justify max-w-xs"
+                            style={{
+                              fontFamily: "’Roboto Mono’, monospace",
+                            }}
+                          >
+                            {art.dimensions}
+                          </i>
+                        )}
+                      </div>
+                      <div>
+                        {art.description && (
+                          <p
+                            className="text-[0.7rem] text-gray-600 leading-relaxed text-justify max-w-xs"
+                            style={{
+                              fontFamily: "’Roboto Mono’, monospace",
+                            }}
+                          >
+                            {art.description}
+                          </p>
+                        )}
+                      </div>
                     </div>
 
-                    {(art.year || art.category) && (
-                      <div className="flex items-center gap-4">
-                        {art.year && (
+                    {(art.year || art.category || art.medium) && (
+                      <div className="flex items-start flex-col gap-2">
+                        {art.medium && (
                           <span
                             className="text-xs text-gray-400"
                             style={{
                               fontFamily: "’Roboto Mono’, monospace",
                             }}
                           >
-                            {art.year}
+                            {art.medium}
                           </span>
                         )}
-
                         {art.category && (
                           <span
                             className="text-xs text-gray-400 uppercase tracking-widest"
@@ -319,6 +338,16 @@ export default function Work() {
                             }}
                           >
                             {art.category}
+                          </span>
+                        )}
+                        {art.year && (
+                          <span
+                            className="text-xs text-gray-400"
+                            style={{
+                              fontFamily: "’Roboto Mono’, monospace",
+                            }}
+                          >
+                            {art.year}
                           </span>
                         )}
                       </div>

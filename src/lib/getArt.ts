@@ -9,7 +9,11 @@ export async function getArt() {
       featuredImage,
       year,
       category,
-      description
+      description,
+      medium,
+      dimensions,
+      price,
+      "images": images[].asset->url
     }
   `);
 

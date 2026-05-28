@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import gsap from "gsap";
-import logo from "../assets/logo.png";
+import logo_400_webp from "../assets/optimized/logo-400.webp";
+import logo_800_webp from "../assets/optimized/logo-800.webp";
+import logo_400_jpg from "../assets/optimized/logo-400.jpg";
+import logo_800_jpg from "../assets/optimized/logo-800.jpg";
 import { usePageTransition } from "../context/TransitionContext";
 
 const navItems = [
@@ -119,11 +122,22 @@ export default function Header() {
       <header className="flex items-center sticky top-0 z-1002 bg-inherit border-b border-[#000000] px-4 md:px-8 h-14 md:h-16">
         {/* Logo */}
         <div className="flex flex-1 items-center justify-start">
-          <img
-            src={logo}
-            alt="Domnik's Gallery Logo"
-            className="w-20 h-16 md:w-30 md:h-25 object-cover rounded-full"
-          />
+          <picture>
+            <source
+              type="image/webp"
+              srcSet={`${logo_400_webp} 400w, ${logo_800_webp} 800w`}
+              sizes="80px"
+            />
+            <img
+              src={logo_400_jpg}
+              srcSet={`${logo_400_jpg} 400w, ${logo_800_jpg} 800w`}
+              sizes="80px"
+              alt="Domnik's Gallery Logo"
+              loading="lazy"
+              decoding="async"
+              className="w-20 h-16 md:w-30 md:h-25 object-cover rounded-full"
+            />
+          </picture>
         </div>
 
         {/* Location — desktop only */}
@@ -160,7 +174,7 @@ export default function Header() {
 
         {/* Hamburger button — mobile/tablet only */}
         <button
-          className="md:hidden flex flex-col justify-center items-center gap-[5px] w-10 h-10 -mr-1 focus:outline-none"
+          className="md:hidden flex flex-col justify-center items-center gap-1.25 w-10 h-10 -mr-1 focus:outline-none"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}

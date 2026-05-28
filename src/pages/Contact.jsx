@@ -1,6 +1,12 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import contactImg from "../assets/IMG_4272.JPG.jpeg";
+import contact_400_webp from "../assets/optimized/IMG_4272.JPG-400.webp";
+import contact_800_webp from "../assets/optimized/IMG_4272.JPG-800.webp";
+import contact_1200_webp from "../assets/optimized/IMG_4272.JPG-1200.webp";
+import contact_400_jpg from "../assets/optimized/IMG_4272.JPG-400.jpg";
+import contact_800_jpg from "../assets/optimized/IMG_4272.JPG-800.jpg";
+import contact_1200_jpg from "../assets/optimized/IMG_4272.JPG-1200.jpg";
 import { usePageTransition } from "../context/TransitionContext";
 
 export default function Contact() {
@@ -108,13 +114,20 @@ export default function Contact() {
 
       {/* Image: flows on mobile (right-aligned), absolute on desktop */}
       <div className="flex  md:justify-end md:block md:absolute md:top-10 md:right-8  mb-6 md:mb-0">
-        <img
-          ref={imageRef}
-          src={contactImg}
-          alt="contact image"
-          className="w-80 h-auto md:w-80 md:h-100 object-fill"
-          style={{ willChange: "transform" }}
-        />
+        <picture>
+          <source type="image/webp" srcSet={`${contact_400_webp} 400w, ${contact_800_webp} 800w, ${contact_1200_webp} 1200w`} sizes="(max-width: 768px) 90vw, 25vw" />
+          <img
+            ref={imageRef}
+            src={contact_800_jpg}
+            srcSet={`${contact_400_jpg} 400w, ${contact_800_jpg} 800w, ${contact_1200_jpg} 1200w`}
+            sizes="(max-width: 768px) 90vw, 25vw"
+            alt="contact image"
+            loading="lazy"
+            decoding="async"
+            className="w-80 h-auto md:w-80 md:h-100 object-fill"
+            style={{ willChange: "transform" }}
+          />
+        </picture>
       </div>
 
       <div className=" md:mt-10 gap-0 text-gray-700 text-lg leading-relaxed flex flex-col md:flex-row  md:gap-14 max-w-4xl">

@@ -174,7 +174,7 @@ export default function Work() {
                   </div>
 
                   {/* Right */}
-                  <div className="w-full md:w-[42%] shrink-0 px-6 py-8 md:px-14 md:py-16 flex flex-col justify-between bg-[#EDE9E6] overflow-y-auto md:overflow-y-visible">
+                  <div className="w-full md:w-[42%] shrink-0 px-6 py-8 md:px-14 md:py-16 flex flex-col md:gap-28 gap-0 bg-[#EDE9E6] overflow-y-auto md:overflow-y-visible">
                     <div className="flex flex-col gap-4 md:gap-6">
                       <span
                         className="text-xs tracking-[0.28em] text-gray-400 uppercase"
@@ -224,11 +224,35 @@ export default function Work() {
                   {/* Left — image */}
                   <div className="w-full h-1/2 md:w-[58%] md:h-full shrink-0 overflow-hidden">
                     {art.featuredImage ? (
-                      <img
-                        src={urlFor(art.featuredImage).width(1400).url()}
-                        alt={art.title}
-                        className="w-full h-full object-cover"
-                      />
+                      <picture>
+                        <source
+                          type="image/webp"
+                          srcSet={[400, 800, 1200, 1600]
+                            .map(
+                              (w) =>
+                                `${urlFor(art.featuredImage).width(w).format("webp").url()} ${w}w`,
+                            )
+                            .join(", ")}
+                          sizes="(max-width: 768px) 90vw, 58vw"
+                        />
+                        <img
+                          src={urlFor(art.featuredImage)
+                            .width(800)
+                            .format("jpg")
+                            .url()}
+                          srcSet={[400, 800, 1200, 1600]
+                            .map(
+                              (w) =>
+                                `${urlFor(art.featuredImage).width(w).format("jpg").url()} ${w}w`,
+                            )
+                            .join(", ")}
+                          sizes="(max-width: 768px) 90vw, 58vw"
+                          alt={art.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </picture>
                     ) : (
                       <div className="w-full h-full bg-stone-200" />
                     )}

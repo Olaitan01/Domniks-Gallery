@@ -1,6 +1,10 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import Domnik from "../assets/domnik.png";
+// optimized domnik assets
+import domnik_400_webp from "../assets/optimized/domnik-400.webp";
+import domnik_800_webp from "../assets/optimized/domnik-800.webp";
+import domnik_400_jpg from "../assets/optimized/domnik-400.jpg";
+import domnik_800_jpg from "../assets/optimized/domnik-800.jpg";
 import { usePageTransition } from "../context/TransitionContext";
 
 export default function About() {
@@ -82,13 +86,24 @@ export default function About() {
 
       {/* Image: flows on mobile, absolute on desktop */}
       <div className="flex justify-center md:block mt-4 md:mt-0 md:absolute md:bottom-15 md:right-0">
-        <img
-          ref={imageRef}
-          src={Domnik}
-          alt="Domnik"
-          className="w-60 md:max-w-fit md:w-3xs"
-          style={{ willChange: "transform" }}
-        />
+        <picture>
+          <source
+            type="image/webp"
+            srcSet={`${domnik_400_webp} 400w, ${domnik_800_webp} 800w`}
+            sizes="(max-width: 768px) 60vw, 240px"
+          />
+          <img
+            ref={imageRef}
+            src={domnik_800_jpg}
+            srcSet={`${domnik_400_jpg} 400w, ${domnik_800_jpg} 800w`}
+            sizes="(max-width: 768px) 60vw, 240px"
+            alt="Domnik"
+            loading="lazy"
+            decoding="async"
+            className="w-60 md:max-w-fit md:w-3xs"
+            style={{ willChange: "transform" }}
+          />
+        </picture>
       </div>
 
       <div className="w-full flex justify-start md:justify-end mt-4 md:mt-0">

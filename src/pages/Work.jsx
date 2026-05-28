@@ -3,6 +3,7 @@ import { getArt } from "../lib/getArt";
 import { urlFor } from "../lib/image";
 import gsap from "gsap";
 import { Observer } from "gsap/Observer";
+import { NavLink } from "react-router-dom";
 
 gsap.registerPlugin(Observer);
 
@@ -222,7 +223,7 @@ export default function Work() {
                       </p>
                     </div>
 
-                    <a
+                    <NavLink
                       href="./Contact"
                       className="w-fit mt-6 md:mt-0 border border-black px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase transition-all duration-300 hover:bg-black hover:text-white"
                       style={{
@@ -230,7 +231,7 @@ export default function Work() {
                       }}
                     >
                       Contact Me
-                    </a>
+                    </NavLink>
                   </div>
                 </>
               ) : (

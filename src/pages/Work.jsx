@@ -138,7 +138,7 @@ export default function Work() {
       {/* ── Infinite gallery ── */}
       <section
         ref={galleryRef}
-        className="relative h-screen overflow-x-hidden bg-[#EDE9E6]"
+        className="relative h-screen overflow-x-hidden md:overflow-hidden bg-[#EDE9E6]"
         style={{ touchAction: "none" }}
       >
         {arts.length === 0 && (

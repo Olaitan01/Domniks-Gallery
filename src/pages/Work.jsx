@@ -224,7 +224,7 @@ export default function Work() {
                     </div>
 
                     <NavLink
-                      href="./Contact"
+                      to="./Contact"
                       className="w-fit mt-6 md:mt-0 border border-black px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase transition-all duration-300 hover:bg-black hover:text-white"
                       style={{
                         fontFamily: "’Roboto Mono’, monospace",

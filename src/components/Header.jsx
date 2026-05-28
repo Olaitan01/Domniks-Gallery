@@ -259,7 +259,7 @@ export default function Header() {
                 }}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-semibold text-gray-900"
+                    ? "font-semibold text-gray-900 relative pl-6 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-black"
                     : "text-gray-400 hover:text-gray-900 transition-colors duration-200"
                 }
                 style={{

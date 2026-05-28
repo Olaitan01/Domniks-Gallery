@@ -93,7 +93,7 @@ export default function Contact() {
   return (
     <main className="flex flex-col min-h-screen  px-4 md:px-6 relative overflow-x-hidden md:overflow-y-hidden">
       {/* Title: flows on mobile, absolute on desktop */}
-      <div className="overflow-hidden pt-6 md:pt-0 md:absolute md:bottom-30 md:left-10">
+      <div className="overflow-hidden mb-10 pt-6 md:pt-0 md:absolute md:bottom-30 md:left-10">
         <h1
           ref={titleRef}
           className="font-semibold leading-tight"
@@ -107,18 +107,18 @@ export default function Contact() {
       </div>
 
       {/* Image: flows on mobile (right-aligned), absolute on desktop */}
-      <div className="flex justify-center items-center md:justify-end md:block md:absolute md:top-10 md:right-8  mb-6 md:mb-0">
+      <div className="flex  md:justify-end md:block md:absolute md:top-10 md:right-8  mb-6 md:mb-0">
         <img
           ref={imageRef}
           src={contactImg}
           alt="contact image"
-          className="w-44 h-56 md:w-80 md:h-100 object-fill"
+          className="w-80 h-auto md:w-80 md:h-100 object-fill"
           style={{ willChange: "transform" }}
         />
       </div>
 
-      <div className="mt-30 md:mt-10 text-gray-700 text-lg leading-relaxed flex flex-col md:flex-row gap-6 md:gap-14 max-w-4xl">
-        <div className="flex flex-col gap-2">
+      <div className=" md:mt-10 gap-0 text-gray-700 text-lg leading-relaxed flex flex-col md:flex-row  md:gap-14 max-w-4xl">
+        <div className="flex flex-col gap-2 ">
           <div className="flex flex-col gap-1">
             <span
               className="text-[#000000]"

@@ -323,7 +323,7 @@ export default function Work() {
 
       {/* ── Work. title ── */}
       <section className="relative ">
-        <div className="absolute bottom-30 right-10 overflow-hidden z-999">
+        <div className="absolute md:bottom-30 bottom-18 right-10 overflow-hidden z-999">
           <h1
             ref={titleRef}
             className="font-semibold leading-tight"

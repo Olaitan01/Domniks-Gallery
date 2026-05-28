@@ -92,8 +92,8 @@ export default function Header() {
 
   // Close on route change — close menu asynchronously on route change to avoid synchronous setState in effect
   useEffect(() => {
-  setMenuOpen(false);
-}, [location.pathname]);
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   // Close on Escape
   useEffect(() => {
@@ -113,8 +113,17 @@ export default function Header() {
   );
 
   function handleNavClick(to) {
+    // Prevent transition on current page
+    if (location.pathname === to) {
+      setMenuOpen(false);
+      return;
+    }
+
     setMenuOpen(false);
-    setTimeout(() => navigateTo(to), 420);
+
+    setTimeout(() => {
+      navigateTo(to);
+    }, 420);
   }
 
   return (
@@ -156,6 +165,11 @@ export default function Header() {
                   to={to}
                   end
                   onClick={(e) => {
+                    if (location.pathname === to) {
+                      e.preventDefault();
+                      return;
+                    }
+
                     e.preventDefault();
                     navigateTo(to);
                   }}

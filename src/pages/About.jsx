@@ -10,8 +10,12 @@ import { usePageTransition } from "../context/TransitionContext";
 export default function About() {
   const titleRef = useRef(null);
   const imageRef = useRef(null);
-  const { registerExit, captureSharedImage, peekSharedImage, clearSharedImage } =
-    usePageTransition();
+  const {
+    registerExit,
+    captureSharedImage,
+    peekSharedImage,
+    clearSharedImage,
+  } = usePageTransition();
 
   // Apply FLIP offset before first paint so there's no visible flash
   useLayoutEffect(() => {
@@ -38,7 +42,11 @@ export default function About() {
             clearSharedImage();
           }
           const tl = gsap.timeline({ onComplete: resolve });
-          tl.to(imageRef.current, { opacity: 0, duration: 0.30, ease: "power2.in" }, 0).to(
+          tl.to(
+            imageRef.current,
+            { opacity: 0, duration: 0.3, ease: "power2.in" },
+            0,
+          ).to(
             titleRef.current,
             { y: -20, opacity: 0, duration: 0.45, ease: "power2.in" },
             0,
@@ -49,17 +57,36 @@ export default function About() {
     const data = peekSharedImage();
     if (data && imageRef.current) {
       clearSharedImage();
-      gsap.to(imageRef.current, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 0.85, ease: "expo.out" });
+      gsap.to(imageRef.current, {
+        x: 0,
+        y: 0,
+        scaleX: 1,
+        scaleY: 1,
+        duration: 0.85,
+        ease: "expo.out",
+      });
       gsap.fromTo(
         titleRef.current,
         { yPercent: 0, opacity: 0 },
-        { yPercent: 10, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.2 },
+        {
+          yPercent: 10,
+          opacity: 1,
+          duration: 1.1,
+          ease: "power3.out",
+          delay: 0.2,
+        },
       );
     } else {
       gsap.fromTo(
         titleRef.current,
         { yPercent: 0, opacity: 0 },
-        { yPercent: 10, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.5 },
+        {
+          yPercent: 10,
+          opacity: 1,
+          duration: 1.1,
+          ease: "power3.out",
+          delay: 0.5,
+        },
       );
     }
 
@@ -90,17 +117,17 @@ export default function About() {
           <source
             type="image/webp"
             srcSet={`${domnik_400_webp} 400w, ${domnik_800_webp} 800w`}
-            sizes="(max-width: 768px) 60vw, 240px"
+            sizes="(max-width: 768px) 60vw, 360px"
           />
           <img
             ref={imageRef}
             src={domnik_800_jpg}
             srcSet={`${domnik_400_jpg} 400w, ${domnik_800_jpg} 800w`}
-            sizes="(max-width: 768px) 60vw, 240px"
+            sizes="(max-width: 768px) 60vw, 360px"
             alt="Domnik"
             loading="lazy"
             decoding="async"
-            className="w-60 md:max-w-fit md:w-3xs"
+            className="w-48 md:w-60"
             style={{ willChange: "transform" }}
           />
         </picture>

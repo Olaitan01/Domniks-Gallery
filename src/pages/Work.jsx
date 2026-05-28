@@ -14,6 +14,7 @@ export default function Work() {
   const panelRefs = useRef([]);
   const curIdx = useRef(0);
   const animating = useRef(false);
+  const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
     gsap.fromTo(
@@ -97,19 +98,23 @@ export default function Work() {
 
     const obs = Observer.create({
       target: galleryRef.current,
-      type: "wheel,touch,pointer",
+      type: isMobile ? "touch,pointer" : "wheel,touch,pointer",
 
-      onLeft: () => goTo(curIdx.current + 1, 1),
+      ...(isMobile
+        ? {
+            onLeft: () => goTo(curIdx.current + 1, 1),
 
-      onRight: () => goTo(curIdx.current - 1, -1),
+            onRight: () => goTo(curIdx.current - 1, -1),
+          }
+        : {
+            onDown: () => goTo(curIdx.current + 1, 1),
 
-      // Optional desktop wheel fallback
-      onDown: () => goTo(curIdx.current + 1, 1),
-      onUp: () => goTo(curIdx.current - 1, -1),
+            onUp: () => goTo(curIdx.current - 1, -1),
+          }),
 
       tolerance: 12,
       lockAxis: true,
-      preventDefault: true,
+      preventDefault: !isMobile,
     });
 
     function handleKey(e) {
@@ -125,14 +130,14 @@ export default function Work() {
       window.removeEventListener("keydown", handleKey);
       gsap.killTweensOf(panels);
     };
-  }, [arts]);
+  }, [arts, isMobile]);
 
   return (
     <main className="flex flex-col relative">
       {/* ── Infinite gallery ── */}
       <section
         ref={galleryRef}
-        className="relative h-screen overflow-hidden bg-[#EDE9E6]"
+        className="relative h-screen overflow-x-hidden bg-[#EDE9E6]"
         style={{ touchAction: "none" }}
       >
         {arts.length === 0 && (

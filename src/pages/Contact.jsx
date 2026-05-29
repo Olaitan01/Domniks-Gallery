@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { NavLink } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 // import contactImg from "../assets/IMG_4272.JPG.jpeg";
@@ -160,7 +161,11 @@ export default function Contact() {
       {/* Image: flows on mobile (right-aligned), absolute on desktop */}
       <div className="flex  md:justify-end md:block md:absolute md:top-10 md:right-8  mb-6 md:mb-0">
         <picture>
-          <source type="image/webp" srcSet={`${contact_400_webp} 400w, ${contact_800_webp} 800w, ${contact_1200_webp} 1200w`} sizes="(max-width: 768px) 90vw, 25vw" />
+          <source
+            type="image/webp"
+            srcSet={`${contact_400_webp} 400w, ${contact_800_webp} 800w, ${contact_1200_webp} 1200w`}
+            sizes="(max-width: 768px) 90vw, 25vw"
+          />
           <img
             ref={imageRef}
             src={contact_800_jpg}
@@ -175,7 +180,10 @@ export default function Contact() {
         </picture>
       </div>
 
-      <div ref={contactInfoRef} className=" md:mt-10 gap-0 text-gray-700 text-lg leading-relaxed flex flex-col md:flex-row  md:gap-14 max-w-4xl">
+      <div
+        ref={contactInfoRef}
+        className=" md:mt-10 gap-0 text-gray-700 text-lg leading-relaxed flex flex-col md:flex-row  md:gap-14 max-w-4xl"
+      >
         <div className="flex flex-col gap-2 ">
           <div className="flex flex-col gap-1">
             <span
@@ -187,12 +195,18 @@ export default function Contact() {
             <span className="text-sm">Anambra, Awka.</span>
           </div>
           <div className="flex flex-col gap-1 text-sm mt-4">
-            <span>Tel:+2348025053067</span>
-            <span>IG: domniksgallery</span>
+            <NavLink to={"tel:+2348025053067"}>
+              <span>Tel:+2348025053067</span>
+            </NavLink>
+            <NavLink to={"https://www.instagram.com/domniksgallery/"} target="_blank">
+              <span>IG: domniksgallery</span>
+            </NavLink>
           </div>
         </div>
         <div>
-          <span className="text-sm">TikTok: +2348025053067</span>
+          <NavLink to={"https://www.tiktok.com/@domniks_gallery"} target="_blank">
+            <span className="text-sm">TikTok: domniks_gallery</span>
+          </NavLink>
         </div>
       </div>
     </main>

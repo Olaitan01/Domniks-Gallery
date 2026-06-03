@@ -313,7 +313,7 @@ export default function Work() {
                       <div>
                         {art.description && (
                           <p
-                            className="text-[0.7rem] text-gray-600 leading-relaxed text-justify max-w-xs"
+                            className="md:text-[0.7rem] text-sm text-gray-600 leading-relaxed text-justify max-w-xs"
                             style={{
                               fontFamily: "’Roboto Mono’, monospace",
                             }}

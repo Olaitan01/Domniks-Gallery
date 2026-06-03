@@ -137,12 +137,12 @@ export default function About() {
   }, []);
 
   return (
-    <main className="flex flex-col min-h-screen px-4 md:px-6 relative overflow-x-hidden md:overflow-y-hidden">
+    <main className="flex flex-col min-h-screen px-4 md:px-6 relative overflow-x-hidden md:overflow-y-hidden responsive-domnik">
       {/* Title: flows on mobile at top, absolute on desktop at bottom-left */}
       <div className="overflow-hidden pt-6 md:pt-0 md:absolute md:bottom-30 md:left-10">
         <h1
           ref={titleRef}
-          className="font-semibold leading-tight"
+          className="font-semibold leading-tight responsive-heading"
           style={{
             fontFamily: "'Playfair Display', serif",
             fontSize: "clamp(48px, 8vw, 96px)",
@@ -188,7 +188,7 @@ export default function About() {
             >
               From The Archivist
             </h2>
-            <p className="mt-4 text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-2xs text-justify">
+            <p className="mt-4 text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-4 md:gap-2 w-full md:w-2xs ">
               <span>
                 Certain memories elude us in our daily struggle to survive. They
                 fade- not because they are unimportant, but because we fail to
@@ -196,9 +196,9 @@ export default function About() {
               </span>{" "}
               <span>
                 With every passing moment, new memories are made. Yet without
-                something to hold them in place- no memento, no form- they slip
-                quietly into the recesses of the mind, waiting... for something,
-                or someone to bring them back.
+                something to hold them in place - no memento, no form - they
+                slip quietly into the recesses of the mind, waiting... for
+                something, or someone to bring them back.
               </span>{" "}
               <span>
                 The arthive is that something. It exists to build mementos for
@@ -216,13 +216,13 @@ export default function About() {
             >
               The Arthive — Documentation Process
             </h2>
-            <div className="flex flex-col sm:flex-row gap-0 md:gap-15 items-start md:items-baseline">
+            <div className="  flex flex-col sm:flex-row gap-2 md:gap-15 items-start md:items-baseline">
               <div ref={processCol1Ref}>
-                <p className="mt-4 text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-2xs text-justify">
+                <p className="mt-4 text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-4 md:gap-2 w-full md:w-2xs ">
                   <span>The Arthive begins with memory.</span>{" "}
                   <span>
                     Not history as recorded by institutions, but history as
-                    carried by people— through recollection, emotion, fragments,
+                    carried by people — through recollection, emotion, fragments,
                     routines, objects, and atmosphere.
                   </span>{" "}
                   <span>
@@ -244,25 +244,25 @@ export default function About() {
                     but to the sensory and emotional traces surrounding them:
                   </span>
                 </p>
-                <div>
-                  <ul className="list-disc list-inside text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-2xs">
-                    <li>the feeling of a room,</li>
-                    <li>the texture of a street,</li>
-                    <li>the sound of evening radios,</li>
-                    <li>the sound of footsteps,</li>
-                    <li>clothing,</li>
+                <div className="pt-4">
+                  <ul className="list-disc list-inside text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-2 w-full md:w-2xs">
+                    <li>The feeling of a room,</li>
+                    <li>The texture of a street,</li>
+                    <li>The sound of evening radios,</li>
+                    <li>The sound of footsteps,</li>
+                    <li>Clothing,</li>
                   </ul>
                 </div>
               </div>
               <div ref={processCol2Ref}>
-                <ul className="list-disc list-inside text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-2xs">
+                <ul className="list-disc list-inside text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-2 w-full md:w-2xs">
                   <li>Silence,</li>
                   <li>Gestures,</li>
                   <li>Architectures,</li>
                   <li>Routines,</li>
                   <li>Objects once considered ordinary</li>
                 </ul>
-                <p className="mt-2 pb-14 md:pb-0 text-gray-700 text-[0.7rem] leading-tight flex flex-col gap-2 w-full md:w-3xs text-justify">
+                <p className="mt-2 pb-14 md:pb-0 text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-2 w-full md:w-3xs ">
                   From this conversation a visual archive is constructed
                 </p>
               </div>

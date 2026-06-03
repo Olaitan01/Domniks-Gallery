@@ -27,9 +27,9 @@ import img3_800_jpg from "../assets/optimized/IMG_4272.JPG-800.jpg";
 import img3_1200_jpg from "../assets/optimized/IMG_4272.JPG-1200.jpg";
 
 const heroImg = [
-  { src: img1, rotation: 0,      mobileRotation: 0   },
+  { src: img1, rotation: 0, mobileRotation: 0 },
   { src: img2, rotation: -30.39, mobileRotation: -10 },
-  { src: img3, rotation: -14.12, mobileRotation: -5  },
+  { src: img3, rotation: -14.12, mobileRotation: -5 },
 ];
 
 export default function Home() {
@@ -44,9 +44,17 @@ export default function Home() {
       () =>
         new Promise((resolve) => {
           const tl = gsap.timeline({ onComplete: resolve });
-          tl.to(titleRef.current, { y: 50, opacity: 0, duration: 0.6, ease: "power2.in" })
-            .to(subtitleRef.current, { y: 25, opacity: 0, duration: 0.4, ease: "power2.in" }, "-=0.35");
-        })
+          tl.to(titleRef.current, {
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.in",
+          }).to(
+            subtitleRef.current,
+            { y: 25, opacity: 0, duration: 0.4, ease: "power2.in" },
+            "-=0.35",
+          );
+        }),
     );
 
     const isMobile = window.innerWidth < 768;
@@ -59,22 +67,36 @@ export default function Home() {
         .from(quoteRef.current, { x: 30, opacity: 0, duration: 1 }, "-=0.5")
         .fromTo(
           imgRefs.current[0],
-          { y: 50, opacity: 0, rotation: (isMobile ? heroImg[0].mobileRotation : heroImg[0].rotation) + 6 },
+          {
+            y: 50,
+            opacity: 0,
+            rotation:
+              (isMobile ? heroImg[0].mobileRotation : heroImg[0].rotation) + 6,
+          },
           {
             y: 0,
             opacity: 1,
-            rotation: isMobile ? heroImg[0].mobileRotation : heroImg[0].rotation,
+            rotation: isMobile
+              ? heroImg[0].mobileRotation
+              : heroImg[0].rotation,
             duration: 1,
             ease: "expo.out",
           },
         )
         .fromTo(
           imgRefs.current[1],
-          { y: 50, opacity: 0, rotation: (isMobile ? heroImg[1].mobileRotation : heroImg[1].rotation) + 6 },
+          {
+            y: 50,
+            opacity: 0,
+            rotation:
+              (isMobile ? heroImg[1].mobileRotation : heroImg[1].rotation) + 6,
+          },
           {
             y: 0,
             opacity: 1,
-            rotation: isMobile ? heroImg[1].mobileRotation : heroImg[1].rotation,
+            rotation: isMobile
+              ? heroImg[1].mobileRotation
+              : heroImg[1].rotation,
             duration: 1,
             ease: "expo.out",
           },
@@ -82,11 +104,18 @@ export default function Home() {
         )
         .fromTo(
           imgRefs.current[2],
-          { y: 50, opacity: 0, rotation: (isMobile ? heroImg[2].mobileRotation : heroImg[2].rotation) + 6 },
+          {
+            y: 50,
+            opacity: 0,
+            rotation:
+              (isMobile ? heroImg[2].mobileRotation : heroImg[2].rotation) + 6,
+          },
           {
             y: 0,
             opacity: 1,
-            rotation: isMobile ? heroImg[2].mobileRotation : heroImg[2].rotation,
+            rotation: isMobile
+              ? heroImg[2].mobileRotation
+              : heroImg[2].rotation,
             duration: 1,
             ease: "expo.out",
           },
@@ -102,7 +131,10 @@ export default function Home() {
       <h1
         ref={titleRef}
         className="font-semibold mb-3 md:mb-4 flex flex-col justify-start leading-tight md:leading-20"
-        style={{ fontFamily: "’Playfair Display’, serif", fontSize: "clamp(40px, 9vw, 96px)" }}
+        style={{
+          fontFamily: "’Playfair Display’, serif",
+          fontSize: "clamp(40px, 9vw, 96px)",
+        }}
       >
         Realism <span>with an Impression.</span>
       </h1>
@@ -120,17 +152,45 @@ export default function Home() {
 
       {/* Image stack + quote: flow on mobile, absolute on desktop */}
       <div className="flex flex-col items-center gap-6 mt-9 w-full md:block md:mt-0">
-        <div
-          className="relative w-77.25 h-51 -top-2.5 left-8 md:absolute md:left-51.25 md:top-81.5"
-        >
+        <div className="relative w-77.25 h-51 -top-2.5 left-8 md:absolute md:left-51.25 md:top-81.5">
           {heroImg.map((item, index) => {
             // choose the optimized imports based on index
-            const webp400 = index === 0 ? img1_400_webp : index === 1 ? img2_400_webp : img3_400_webp
-            const webp800 = index === 0 ? img1_800_webp : index === 1 ? img2_800_webp : img3_800_webp
-            const webp1200 = index === 0 ? img1_1200_webp : index === 1 ? img2_1200_webp : img3_1200_webp
-            const jpg400 = index === 0 ? img1_400_jpg : index === 1 ? img2_400_jpg : img3_400_jpg
-            const jpg800 = index === 0 ? img1_800_jpg : index === 1 ? img2_800_jpg : img3_800_jpg
-            const jpg1200 = index === 0 ? img1_1200_jpg : index === 1 ? img2_1200_jpg : img3_1200_jpg
+            const webp400 =
+              index === 0
+                ? img1_400_webp
+                : index === 1
+                  ? img2_400_webp
+                  : img3_400_webp;
+            const webp800 =
+              index === 0
+                ? img1_800_webp
+                : index === 1
+                  ? img2_800_webp
+                  : img3_800_webp;
+            const webp1200 =
+              index === 0
+                ? img1_1200_webp
+                : index === 1
+                  ? img2_1200_webp
+                  : img3_1200_webp;
+            const jpg400 =
+              index === 0
+                ? img1_400_jpg
+                : index === 1
+                  ? img2_400_jpg
+                  : img3_400_jpg;
+            const jpg800 =
+              index === 0
+                ? img1_800_jpg
+                : index === 1
+                  ? img2_800_jpg
+                  : img3_800_jpg;
+            const jpg1200 =
+              index === 0
+                ? img1_1200_jpg
+                : index === 1
+                  ? img2_1200_jpg
+                  : img3_1200_jpg;
 
             return (
               <picture key={index} style={{ zIndex: index }}>
@@ -151,19 +211,25 @@ export default function Home() {
                   className="absolute inset-0 md:w-full w-60 h-full object-cover rounded-lg shadow-lg "
                 />
               </picture>
-            )
+            );
           })}
         </div>
         <div
           ref={quoteRef}
-          className="px-4 max-w-sm w-full md:p-6 md:absolute md:left-150 md:top-57.5 md:max-w-lg md:px-0"
+          className="px-4 pb-6 max-w-sm w-full md:p-6 md:absolute md:pb-0 md:left-150 md:top-57.5 md:max-w-lg md:px-0"
         >
-          <span className="text-xs text-gray-500 block text-justify font-light">
-            I admired the world so much that when that when I could tour it, I
+          <span
+            className="text-sm text-gray-500 block text-justify font-light lg:text-sm"
+            style={{
+              fontFamily: "’Anonymous Pro’, monospace",
+              fontWeight: 300,
+            }}
+          >
+            I admire the world so much that when I couldn't tour it, I
             brought it home on every piece, a part of the world is fully lived -
             it’s beauty, its colours, and its cultures. I may have only seen
-            pictures of may places beyond, but every brushstroke build a
-            nostalgia for places i had never bee. - Ezeonu, Chinedum Martin
+            pictures of many places beyond, but every brushstroke builds a
+            nostalgia for places I had never been. - Ezeonu, Chinedum Martin
           </span>
         </div>
       </div>

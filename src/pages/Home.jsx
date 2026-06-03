@@ -219,7 +219,7 @@ export default function Home() {
           className="px-4 pb-6 max-w-sm w-full md:p-6 md:absolute md:pb-0 md:left-150 md:top-57.5 md:max-w-lg md:px-0"
         >
           <span
-            className="text-sm text-gray-500 block text-justify font-light lg:text-sm"
+            className="text-sm text-gray-500 block md:text-justify font-light lg:text-sm"
             style={{
               fontFamily: "’Anonymous Pro’, monospace",
               fontWeight: 300,

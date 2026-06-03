@@ -188,7 +188,7 @@ export default function About() {
             >
               From The Archivist
             </h2>
-            <p className="mt-4 text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-4 md:gap-2 w-full md:w-2xs ">
+            <p className="mt-4 text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-4 md:gap-2 w-full md:w-2xs md:text-justify">
               <span>
                 Certain memories elude us in our daily struggle to survive. They
                 fade- not because they are unimportant, but because we fail to
@@ -218,7 +218,7 @@ export default function About() {
             </h2>
             <div className="  flex flex-col sm:flex-row gap-2 md:gap-15 items-start md:items-baseline">
               <div ref={processCol1Ref}>
-                <p className="mt-4 text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-4 md:gap-2 w-full md:w-2xs ">
+                <p className="mt-4 text-gray-700 md:text-[0.7rem] text-sm leading-tight flex flex-col gap-4 md:gap-2 w-full md:w-2xs md:text-justify">
                   <span>The Arthive begins with memory.</span>{" "}
                   <span>
                     Not history as recorded by institutions, but history as

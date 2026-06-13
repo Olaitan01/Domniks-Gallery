@@ -155,7 +155,7 @@ export default function About() {
       {/* Image: flows on mobile, absolute on desktop */}
       <div
         ref={imageWrapRef}
-        className="flex justify-center md:block mt-4 md:mt-0 md:absolute md:bottom-15 md:right-0"
+        className="flex justify-center md:block mt-4 md:mt-0 md:absolute md:bottom-10 md:right-0"
       >
         <picture>
           <source
@@ -222,8 +222,8 @@ export default function About() {
                   <span>The Arthive begins with memory.</span>{" "}
                   <span>
                     Not history as recorded by institutions, but history as
-                    carried by people — through recollection, emotion, fragments,
-                    routines, objects, and atmosphere.
+                    carried by people — through recollection, emotion,
+                    fragments, routines, objects, and atmosphere.
                   </span>{" "}
                   <span>
                     Each work begins with a Memory Session: a conversation
